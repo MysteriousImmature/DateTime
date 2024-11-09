@@ -1,0 +1,55 @@
+body {
+    width: 100%;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #2c3e50;
+    font-family: 'Arial', sans-serif;
+    color: #ecf0f1;
+}
+
+#year-label {
+    font-size: 24px;
+    font-weight: bold;
+    color: #bdc3c7;
+    margin-bottom: 20px;
+}
+
+#year-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 months per row */
+    gap: 20px;
+}
+
+.month {
+    background-color: #34495e;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+.month-name {
+    font-weight: bold;
+    font-size: 16px;
+    margin-bottom: 5px;
+    color: #ecf0f1;
+}
+
+.days-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 3px;
+    font-size: 12px;
+    color: #bdc3c7;
+}
+
+.days-grid div {
+    padding: 4px;
+    border-radius: 4px;
+    text-align: center;
+}
+
+.days-grid .today {
+    background-color: #3498db;
+    color: white;
+}
