@@ -1,4 +1,4 @@
-### DateTime
-Displays the Date and Time in Real-Time
+# DateTime
+- Displays the Date with monthly and yearly calender
+- Time in Real-Time
 
-> Release :- https://github.com/MysteriousImmature/DateTime/releases/tag/datetime
