@@ -1,44 +1,79 @@
 body {
-    width: 250px;
-    height: 150px;
-    margin: 0;
-    padding: 0;
+    width: 300px;
+    padding: 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background-color: #34495e; /* Slightly lighter background */
-    font-family: 'Arial', sans-serif; /* More common font */
+    background: linear-gradient(145deg, #34495e, #2c3e50);
+    font-family: 'Arial', sans-serif;
     color: #ecf0f1;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4); /* More prominent shadow */
-    border-radius: 15px; /* Rounded corners */
-    transition: background-color 0.3s ease; /* Smooth background transition */
-}
-
-body:hover {
-    background-color: #2c3e50; /* Darker on hover */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    border-radius: 12px;
 }
 
 #datetime-container {
     display: flex;
     align-items: center;
-    margin-top: 10px; /* Adds spacing above the datetime container */
-}
-
-#clock-icon {
-    width: 45px; /* Increased icon size for better visibility */
-    height: 45px; /* Increased icon size */
-    margin-right: 15px;
-    transition: transform 0.3s ease; /* Smooth scale effect on hover */
-}
-
-#clock-icon:hover {
-    transform: scale(1.1); /* Slightly enlarges icon on hover */
+    justify-content: center;
+    width: 100%;
+    padding: 10px;
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
 }
 
 #datetime {
-    font-size: 28px; /* Increased font size for better readability */
+    font-size: 16px;
     font-weight: bold;
     text-align: center;
-    letter-spacing: 0.5px; /* Slightly increase letter spacing */
+}
+
+#open-yearly-calendar {
+    margin-top: 10px;
+    background: #2980b9;
+    color: #ecf0f1;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+#calendar-container {
+    width: 100%;
+    margin-top: 10px;
+    text-align: center;
+    background-color: #2c3e50;
+    padding: 15px;
+    border-radius: 8px;
+}
+
+#month-year {
+    font-weight: bold;
+    font-size: 18px;
+    color: #bdc3c7;
+    margin-bottom: 10px;
+}
+
+#day-names, #calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+    font-size: 14px;
+    color: #ecf0f1;
+}
+
+#day-names div {
+    font-weight: bold;
+    color: #bdc3c7;
+}
+
+#calendar-grid div {
+    padding: 6px;
+    text-align: center;
+    border-radius: 4px;
+}
+
+#calendar-grid .today {
+    background-color: #3498db;
+    color: white;
 }
