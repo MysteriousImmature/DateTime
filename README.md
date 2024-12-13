@@ -4,5 +4,5 @@
 
 # Screenshots
 
-![Screenshots](screenshots/datetime-1.png) 
-![Screenshots](screenshots/datetime-2.png) 
+![Screenshots](screemshots/datetime-1.png) 
+![Screenshots](screemshots/datetime-2.png) 
