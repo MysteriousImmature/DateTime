@@ -7,18 +7,46 @@
   <link rel="stylesheet" href="popup.css">
 </head>
 <body>
+  <div class="header-controls">
+    <button id="theme-toggle" title="Toggle Theme">🌙</button>
+    <select id="timezone-selector" title="Select Timezone">
+      <option value="local">Local Time</option>
+      <option value="UTC">UTC</option>
+      <option value="GMT-8">Pacific Time</option>
+      <option value="GMT-5">Eastern Time</option>
+      <option value="GMT+1">Central European</option>
+      <option value="GMT+5.5">India</option>
+      <option value="GMT+8">China/Singapore</option>
+      <option value="GMT+9">Japan</option>
+      <option value="GMT+10">Australia East</option>
+    </select>
+  </div>
+
   <div id="datetime-container">
-    <img src="images/icon128.png" alt="Clock Icon" id="clock-icon">
+    <div class="icon-wrapper">
+      <span id="clock-icon">🕒</span>
+    </div>
     <div id="datetime"></div>
   </div>
   
-  <button id="open-yearly-calendar">View Yearly Calendar</button>
+  <div class="button-row">
+    <button id="open-yearly-calendar">📆 Yearly View</button>
+    <button id="show-week-numbers" title="Toggle Week Numbers">📋</button>
+  </div>
 
-  <!-- Monthly Calendar Section (Default) -->
+  <!-- Monthly Calendar Section -->
   <div id="calendar-container">
-    <div id="month-year"></div>
+    <div class="calendar-header">
+      <button id="prev-month">◀</button>
+      <div id="month-year"></div>
+      <button id="next-month">▶</button>
+    </div>
     <div id="day-names"></div>
     <div id="calendar-grid"></div>
+  </div>
+
+  <div class="footer">
+    <button id="today-button">📆 Today</button>
   </div>
 
   <script src="popup.js"></script>

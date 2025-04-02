@@ -1,55 +1,278 @@
 body {
     width: 100%;
-    padding: 20px;
+    padding: 24px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    background: #2c3e50;
-    font-family: 'Arial', sans-serif;
-    color: #ecf0f1;
+    background: linear-gradient(145deg, #2b5876, #4e4376);
+    font-family: 'Segoe UI', 'Roboto', 'Arial', sans-serif;
+    color: #ffffff;
+    min-height: 100vh;
+    margin: 0;
+}
+
+body.light-theme {
+    background: linear-gradient(145deg, #70b4e8, #a893ca);
+    color: #333333;
 }
 
 #year-label {
-    font-size: 24px;
-    font-weight: bold;
-    color: #bdc3c7;
-    margin-bottom: 20px;
+    font-size: 28px;
+    font-weight: 600;
+    color: #ffffff;
+    margin-bottom: 25px;
+    letter-spacing: 1px;
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.light-theme #year-label {
+    color: #333333;
+    text-shadow: 0 2px 5px rgba(255, 255, 255, 0.2);
 }
 
 #year-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr); /* 3 months per row */
-    gap: 20px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+    max-width: 900px;
+    margin: 0 auto;
 }
 
 .month {
-    background-color: #34495e;
-    padding: 10px;
-    border-radius: 8px;
+    background-color: rgba(255, 255, 255, 0.08);
+    padding: 16px;
+    border-radius: 16px;
+    backdrop-filter: blur(8px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.light-theme .month {
+    background-color: rgba(0, 0, 0, 0.03);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.month:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
 }
 
 .month-name {
-    font-weight: bold;
-    font-size: 16px;
-    margin-bottom: 5px;
-    color: #ecf0f1;
+    font-weight: 600;
+    font-size: 18px;
+    margin-bottom: 12px;
+    color: #ffffff;
+    text-align: center;
+    letter-spacing: 0.5px;
+}
+
+.light-theme .month-name {
+    color: #333333;
 }
 
 .days-grid {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    gap: 3px;
+    gap: 5px;
     font-size: 12px;
-    color: #bdc3c7;
+    color: #e0e0e0;
+}
+
+.days-grid.with-week-numbers {
+    grid-template-columns: auto repeat(7, 1fr);
+}
+
+.light-theme .days-grid {
+    color: #555555;
 }
 
 .days-grid div {
-    padding: 4px;
-    border-radius: 4px;
+    padding: 6px;
+    border-radius: 50%;
     text-align: center;
+    transition: background-color 0.2s;
+    position: relative;
+}
+
+.days-grid div:not(:empty):hover {
+    background-color: rgba(255, 255, 255, 0.15);
+    cursor: pointer;
+}
+
+.light-theme .days-grid div:not(:empty):hover {
+    background-color: rgba(0, 0, 0, 0.08);
 }
 
 .days-grid .today {
-    background-color: #3498db;
+    background: linear-gradient(to right, #3a7bd5, #00d2ff);
     color: white;
+    font-weight: 600;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.week-number {
+    font-size: 10px;
+    color: rgba(255, 255, 255, 0.5);
+    grid-column: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 50%;
+    padding: 4px;
+}
+
+.light-theme .week-number {
+    color: rgba(0, 0, 0, 0.4);
+    background: rgba(0, 0, 0, 0.05);
+}
+
+.days-grid .prev-month,
+.days-grid .next-month {
+    opacity: 0.4;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.light-theme .days-grid .prev-month,
+.light-theme .days-grid .next-month {
+    color: rgba(0, 0, 0, 0.35);
+}
+
+@media (max-width: 800px) {
+    #year-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 500px) {
+    #year-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 30px;
+    width: 100%;
+}
+
+.year-nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 15px;
+}
+
+.controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+#prev-year, #next-year, 
+#theme-toggle, #show-week-numbers {
+    background: none;
+    border: none;
+    color: #ffffff;
+    cursor: pointer;
+    font-size: 16px;
+    padding: 8px;
+    border-radius: 50%;
+    transition: background-color 0.2s, transform 0.2s;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#prev-year, #next-year {
+    font-size: 20px;
+    margin: 0 15px;
+}
+
+.light-theme #prev-year, 
+.light-theme #next-year, 
+.light-theme #theme-toggle, 
+.light-theme #show-week-numbers,
+.light-theme #today-button {
+    color: #333333;
+}
+
+#prev-year:hover, #next-year:hover,
+#theme-toggle:hover, #show-week-numbers:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+    transform: translateY(-2px);
+}
+
+.light-theme #prev-year:hover, 
+.light-theme #next-year:hover,
+.light-theme #theme-toggle:hover, 
+.light-theme #show-week-numbers:hover {
+    background-color: rgba(0, 0, 0, 0.08);
+}
+
+#show-week-numbers.active {
+    background: linear-gradient(to right, #3a7bd5, #00d2ff);
+    color: white;
+}
+
+#today-button {
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    color: #ffffff;
+    padding: 10px 20px;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.2s;
+    font-size: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.light-theme #today-button {
+    background: rgba(0, 0, 0, 0.05);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+#today-button:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+.light-theme #today-button:hover {
+    background: rgba(0, 0, 0, 0.1);
+}
+
+footer {
+    margin-top: 40px;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 14px;
+    padding: 20px;
+}
+
+.light-theme footer {
+    color: rgba(0, 0, 0, 0.5);
+}
+
+footer p {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+/* Animation for year change */
+@keyframes slideIn {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.slide-in {
+    animation: slideIn 0.4s ease-out;
 }

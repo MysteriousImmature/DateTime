@@ -1,15 +1,21 @@
 body {
-    width: 300px;
-    padding: 20px;
+    width: 400px;
+    padding: 24px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(145deg, #34495e, #2c3e50);
-    font-family: 'Arial', sans-serif;
-    color: #ecf0f1;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
-    border-radius: 12px;
+    background: linear-gradient(145deg, #2b5876, #4e4376);
+    font-family: 'Segoe UI', 'Roboto', 'Arial', sans-serif;
+    color: #ffffff;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    border-radius: 16px;
+    transition: all 0.3s ease;
+}
+
+body.light-theme {
+    background: linear-gradient(145deg, #70b4e8, #a893ca);
+    color: #333333;
 }
 
 #datetime-container {
@@ -17,63 +23,376 @@ body {
     align-items: center;
     justify-content: center;
     width: 100%;
-    padding: 10px;
-    background-color: rgba(255, 255, 255, 0.05);
-    border-radius: 8px;
+    padding: 15px;
+    background-color: rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    backdrop-filter: blur(8px);
+    margin-bottom: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+#clock-icon {
+    width: 32px;
+    height: 32px;
+    margin-right: 12px;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
 }
 
 #datetime {
-    font-size: 16px;
-    font-weight: bold;
+    font-size: 18px;
+    font-weight: 500;
     text-align: center;
+    letter-spacing: 0.5px;
 }
 
 #open-yearly-calendar {
-    margin-top: 10px;
-    background: #2980b9;
-    color: #ecf0f1;
+    margin: 12px 0;
+    background: linear-gradient(to right, #3a7bd5, #00d2ff);
+    color: white;
     border: none;
-    padding: 8px 12px;
-    border-radius: 8px;
+    padding: 10px 18px;
+    border-radius: 50px;
     cursor: pointer;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+}
+
+#open-yearly-calendar:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
 }
 
 #calendar-container {
     width: 100%;
     margin-top: 10px;
     text-align: center;
-    background-color: #2c3e50;
+    background-color: rgba(255, 255, 255, 0.08);
     padding: 15px;
-    border-radius: 8px;
+    border-radius: 14px;
+    backdrop-filter: blur(8px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    min-height: 280px;
 }
 
 #month-year {
-    font-weight: bold;
-    font-size: 18px;
-    color: #bdc3c7;
-    margin-bottom: 10px;
+    font-weight: 600;
+    font-size: 20px;
+    color: #ffffff;
+    margin-bottom: 15px;
+    letter-spacing: 1px;
 }
 
 #day-names, #calendar-grid {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    gap: 5px;
-    font-size: 14px;
-    color: #ecf0f1;
+    gap: 4px;
+    font-size: 13px;
+    color: #ffffff;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+#calendar-grid.with-week-numbers,
+#day-names.with-week-numbers {
+    grid-template-columns: 24px repeat(7, 1fr);
 }
 
 #day-names div {
-    font-weight: bold;
-    color: #bdc3c7;
+    font-weight: 600;
+    color: #e0e0e0;
+    padding: 4px 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 11px;
 }
 
 #calendar-grid div {
-    padding: 6px;
+    padding: 6px 4px;
     text-align: center;
-    border-radius: 4px;
+    border-radius: 50%;
+    transition: background-color 0.2s, transform 0.2s;
+}
+
+/* Make cells bigger when week numbers are disabled */
+#calendar-grid:not(.with-week-numbers) div {
+    padding: 8px 6px;
+    font-size: 15px;
+}
+
+#day-names:not(.with-week-numbers) div {
+    padding: 6px 0;
+    font-size: 13px;
+}
+
+#calendar-grid div:not(:empty):hover:not(.week-number) {
+    background-color: rgba(255, 255, 255, 0.15);
+    cursor: pointer;
 }
 
 #calendar-grid .today {
-    background-color: #3498db;
+    background: linear-gradient(to right, #3a7bd5, #00d2ff);
     color: white;
+    font-weight: 600;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+#calendar-grid .selected {
+    background-color: rgba(255, 255, 255, 0.25);
+    font-weight: 600;
+}
+
+.time {
+    font-size: 20px;
+    font-weight: 500;
+    margin-top: 5px;
+    letter-spacing: 0.5px;
+}
+
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+#prev-month, #next-month {
+    background: none;
+    border: none;
+    color: #ffffff;
+    cursor: pointer;
+    font-size: 16px;
+    padding: 5px 10px;
+    border-radius: 50%;
+    transition: background-color 0.2s;
+}
+
+#prev-month:hover, #next-month:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+}
+
+.icon-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    margin-right: 12px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+}
+
+#clock-icon {
+    font-size: 20px;
+    color: #ffffff;
+}
+
+.footer {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+}
+
+#today-button {
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    color: #ffffff;
+    padding: 8px 16px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.2s;
+    font-size: 14px;
+}
+
+#today-button:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+}
+
+/* Animation for date change */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in {
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+.header-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+#theme-toggle {
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: #ffffff;
+    transition: background-color 0.2s, transform 0.2s;
+}
+
+#theme-toggle:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+}
+
+#timezone-selector {
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    padding: 6px 10px;
+    border-radius: 12px;
+    color: #ffffff;
+    font-size: 12px;
+    cursor: pointer;
+    outline: none;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.light-theme #timezone-selector {
+    background: rgba(0, 0, 0, 0.05);
+    color: #333333;
+}
+
+#timezone-selector option {
+    background-color: #34495e;
+    color: #ffffff;
+}
+
+.light-theme #timezone-selector option {
+    background-color: #ffffff;
+    color: #333333;
+}
+
+.button-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin: 12px 0;
+}
+
+#show-week-numbers {
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: #ffffff;
+    transition: background-color 0.2s, transform 0.2s;
+}
+
+#show-week-numbers:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+}
+
+#show-week-numbers.active {
+    background: linear-gradient(to right, #3a7bd5, #00d2ff);
+}
+
+.week-number {
+    font-size: 10px;
+    color: rgba(255, 255, 255, 0.7);
+    grid-column: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 50%;
+    min-width: 20px;
+    max-width: 24px;
+    height: 24px;
+}
+
+.week-label {
+    font-size: 10px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.7);
+    grid-column: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 20px;
+    max-width: 24px;
+}
+
+.light-theme .week-number,
+.light-theme .week-label {
+    color: rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.05);
+}
+
+.light-theme #theme-toggle,
+.light-theme #show-week-numbers {
+    color: #333333;
+    background: rgba(0, 0, 0, 0.05);
+}
+
+.light-theme #prev-month, 
+.light-theme #next-month,
+.light-theme #today-button {
+    color: #333333;
+}
+
+.light-theme #month-year,
+.light-theme #day-names div,
+.light-theme #calendar-grid div,
+.light-theme .time,
+.light-theme #datetime {
+    color: #333333;
+}
+
+.light-theme #calendar-container,
+.light-theme #datetime-container {
+    background-color: rgba(0, 0, 0, 0.03);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.light-theme #calendar-grid .selected {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.light-theme #calendar-grid .today {
+    background: linear-gradient(to right, #3a7bd5, #00d2ff);
+    color: white;
+}
+
+.light-theme #calendar-grid div:not(:empty):hover:not(.week-number) {
+    background-color: rgba(0, 0, 0, 0.08);
+}
+
+.timezone-indicator {
+    font-size: 12px;
+    margin-top: 5px;
+    color: rgba(255, 255, 255, 0.7);
+    text-align: center;
+    padding: 2px 8px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    display: inline-block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.light-theme .timezone-indicator {
+    color: rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.05);
 }

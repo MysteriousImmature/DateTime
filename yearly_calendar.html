@@ -7,8 +7,26 @@
   <link rel="stylesheet" href="yearly_calendar.css">
 </head>
 <body>
-  <div id="year-label"></div>
+  <header>
+    <div class="year-nav">
+      <button id="prev-year">◀</button>
+      <h1 id="year-label">2023</h1>
+      <button id="next-year">▶</button>
+    </div>
+    
+    <div class="controls">
+      <button id="theme-toggle" title="Toggle theme">🌙</button>
+      <button id="show-week-numbers" title="Show week numbers">📋</button>
+    </div>
+    
+    <button id="today-button">📆 Today</button>
+  </header>
+  
   <div id="year-grid"></div>
+  
+  <footer>
+    <p>🕒 DateTime</p>
+  </footer>
 
   <script src="yearly_calendar.js"></script>
 </body>
