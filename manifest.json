@@ -1,7 +1,7 @@
 {
     "manifest_version": 3,
     "name": "DateTime",
-    "version": "2.0",
+    "version": "4.0",
     "description": "Enhanced date and time display with customizable calendars, themes, timezones, and event tracking",
     "permissions": ["storage"],
     "action": {
@@ -22,7 +22,7 @@
     },
     "browser_specific_settings": {
         "gecko": {
-          "id": "DateTime@firefox.addon",
+          "id": "DateTime@Auraaid.netlify.com",
           "strict_min_version": "91.0"
         }
     }
