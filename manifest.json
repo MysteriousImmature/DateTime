@@ -1,7 +1,7 @@
 {
     "manifest_version": 3,
     "name": "DateTime",
-    "version": "4.0",
+    "version": "5.0",
     "description": "Enhanced date and time display with customizable calendars, themes, timezones, and event tracking",
     "permissions": ["storage"],
     "action": {
