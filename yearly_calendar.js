@@ -137,7 +137,7 @@ document.addEventListener('DOMContentLoaded', function() {
             daysGrid.className = showWeekNums ? 'days-grid with-week-numbers' : 'days-grid';
             
             // Add day initials (Mon, Tue, etc.)
-            const dayInitials = ['M', 'T', 'W', 'T', 'F', 'S', 'S'];
+            const dayInitials = ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'];
             if (showWeekNums) {
                 const weekLabel = document.createElement('div');
                 weekLabel.className = 'week-label';

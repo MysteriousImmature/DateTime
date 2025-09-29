@@ -6,8 +6,7 @@ document.addEventListener('DOMContentLoaded', function () {
   let appState = {
     theme: 'dark',
     showWeekNumbers: false,
-    timezone: 'local',
-    startWeekOnMonday: false
+    timezone: 'local'
   };
   
   // Load saved state from storage
@@ -106,11 +105,12 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 });
 
-// Helper function: Get week number for a date
+// Helper function: Get week number for a date (ISO 8601 standard)
 function getWeekNumber(date) {
-  const firstDayOfYear = new Date(date.getFullYear(), 0, 1);
-  const pastDaysOfYear = (date - firstDayOfYear) / 86400000;
-  return Math.ceil((pastDaysOfYear + firstDayOfYear.getDay() + 1) / 7);
+  const d = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));
+  d.setUTCDate(d.getUTCDate() + 4 - (d.getUTCDay() || 7));
+  const yearStart = new Date(Date.UTC(d.getUTCFullYear(), 0, 1));
+  return Math.ceil((((d - yearStart) / 86400000) + 1) / 7);
 }
 
 // Helper function: Format date in timezone
@@ -140,7 +140,7 @@ function formatInTimezone(date, timezone) {
         return date;
       }
       
-      const minutes = match[3] ? parseInt(match[3], 10) * 6 : 0; // Convert decimal to minutes
+      const minutes = match[3] ? parseFloat('0.' + match[3]) * 60 : 0; // Convert decimal to minutes
       
       // Validate minutes
       if (minutes > 59) {
@@ -244,8 +244,8 @@ function updateMonthlyCalendar(date) {
     dayNamesElement.classList.remove('with-week-numbers');
   }
   
-  // Set day names (shorter abbreviations)
-  const dayNames = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'];
+  // Set day names (shorter abbreviations) - Monday start
+  const dayNames = ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'];
   dayNames.forEach(day => {
     const dayName = document.createElement('div');
     dayName.textContent = day;
@@ -254,8 +254,11 @@ function updateMonthlyCalendar(date) {
   
   // Get first day of month and days in month
   const today = new Date();
-  const startDay = new Date(date.getFullYear(), date.getMonth(), 1).getDay();
+  let startDay = new Date(date.getFullYear(), date.getMonth(), 1).getDay();
   const daysInMonth = new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
+  
+  // Adjust for Monday as first day (0 = Monday, 6 = Sunday)
+  startDay = startDay === 0 ? 6 : startDay - 1;
   
   // Calculate the week number for the first day of the month
   let currentWeek = getWeekNumber(new Date(date.getFullYear(), date.getMonth(), 1));
