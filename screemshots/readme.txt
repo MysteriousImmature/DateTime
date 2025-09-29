@@ -1,1 +1,0 @@
-dvreenshot directory
